@@ -30,6 +30,11 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //		System.out.println("The app is running");
+
+		// temporary
+		profileRepository.deleteAll();
+		conversationRepository.deleteAll();
+
 		Profile profile = new Profile(
 				"1",
 				"Vysakh",
@@ -57,6 +62,8 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 		conversationRepository.findAll().forEach(System.out::println);
 	}
 	// timestamp ends at : 1:15:20
+	// timestamp ends at : 1:38:58
+
 }
 /*
 Notes:
