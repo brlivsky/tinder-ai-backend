@@ -38,20 +38,17 @@ public class ConversationController {
 
     @PostMapping("/conversations/{conversationId}")
     public Conversation addMessageToConversation(@PathVariable String conversationId, @RequestBody ChatMessage chatMessage) {
-        // check if conversation id exist
         Conversation conversation = conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Unable to find conversation with the ID " + conversationId
                 ));
 
-        // check if author of chatmessage exist
         profileRepository.findById(chatMessage.authorId())
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Unable to find a profile with ID " + chatMessage.authorId()));
 
-        // add chat message to conversation
         ChatMessage messageWithTime = new ChatMessage(
                 chatMessage.messageText(),
                 chatMessage.authorId(),
@@ -61,6 +58,15 @@ public class ConversationController {
         conversation.messages().add(messageWithTime);
         conversationRepository.save(conversation);
         return conversation;
+    }
+
+    @GetMapping("/conversations/{conversationId}")
+    public Conversation getConversation(@PathVariable String conversationId) {
+        return conversationRepository.findById(conversationId).
+                orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Unable to find conversation with ID " + conversationId
+                ));
     }
 
     public record CreateConversationRequest(
