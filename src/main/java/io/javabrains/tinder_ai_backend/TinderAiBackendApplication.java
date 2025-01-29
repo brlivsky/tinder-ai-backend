@@ -1,6 +1,6 @@
 package io.javabrains.tinder_ai_backend;
 
-import io.javabrains.tinder_ai_backend.conversation.ChatMessge;
+import io.javabrains.tinder_ai_backend.conversation.ChatMessage;
 import io.javabrains.tinder_ai_backend.conversation.Conversation;
 import io.javabrains.tinder_ai_backend.conversation.ConversationRepository;
 import io.javabrains.tinder_ai_backend.profiles.Gender;
@@ -29,9 +29,6 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		System.out.println("The app is running");
-
-		// temporary
 		profileRepository.deleteAll();
 		conversationRepository.deleteAll();
 
@@ -47,19 +44,32 @@ public class TinderAiBackendApplication implements CommandLineRunner {
 				"IJFK"
 		);
 		profileRepository.save(profile);
-		profileRepository.findAll().forEach(System.out::println);		// method reference in functional programming
-//		profileRepository.findAll().forEach(x -> System.out.println(x));		// lambda function in functional programming
 
-		Conversation conversation = new Conversation(
-				"1",
-				profile.id(),
-				List.of(
-						new ChatMessge("Hello", profile.id(), LocalDateTime.now())
-				)
+		Profile profile2 = new Profile(
+				"2",
+				"Abhirami",
+				"Harish",
+				26,
+				"Indian",
+				Gender.FEMALE,
+				"Doctor",
+				"bar.jpg",
+				"IJFK"
 		);
+		profileRepository.save(profile2);
+		profileRepository.findAll().forEach(System.out::println);		// method reference in functional programming
+		// profileRepository.findAll().forEach(x -> System.out.println(x));		// lambda function in functional programming
 
-		conversationRepository.save(conversation);
-		conversationRepository.findAll().forEach(System.out::println);
+//		Conversation conversation = new Conversation(
+//				"1",
+//				profile.id(),
+//				List.of(
+//						new ChatMessage("Hello", profile.id(), LocalDateTime.now())
+//				)
+//		);
+//
+//		conversationRepository.save(conversation);
+//		conversationRepository.findAll().forEach(System.out::println);
 	}
 	// timestamp ends at : 1:15:20
 	// timestamp ends at : 1:38:58

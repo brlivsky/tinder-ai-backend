@@ -2,11 +2,10 @@ package io.javabrains.tinder_ai_backend.conversation;
 
 import io.javabrains.tinder_ai_backend.profiles.ProfileRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -33,6 +32,33 @@ public class ConversationController {
                 new ArrayList<>()
         );
 
+        conversationRepository.save(conversation);
+        return conversation;
+    }
+
+    @PostMapping("/conversations/{conversationId}")
+    public Conversation addMessageToConversation(@PathVariable String conversationId, @RequestBody ChatMessage chatMessage) {
+        // check if conversation id exist
+        Conversation conversation = conversationRepository.findById(conversationId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Unable to find conversation with the ID " + conversationId
+                ));
+
+        // check if author of chatmessage exist
+        profileRepository.findById(chatMessage.authorId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Unable to find a profile with ID " + chatMessage.authorId()));
+
+        // add chat message to conversation
+        ChatMessage messageWithTime = new ChatMessage(
+                chatMessage.messageText(),
+                chatMessage.authorId(),
+                LocalDateTime.now()
+        );
+
+        conversation.messages().add(messageWithTime);
         conversationRepository.save(conversation);
         return conversation;
     }

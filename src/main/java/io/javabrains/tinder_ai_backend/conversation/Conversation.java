@@ -5,6 +5,6 @@ import java.util.List;
 public record Conversation(
         String id,
         String profileId,
-        List<ChatMessge> messages
+        List<ChatMessage> messages
 ) {
 }
