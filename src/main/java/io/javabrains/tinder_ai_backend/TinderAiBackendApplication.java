@@ -1,6 +1,5 @@
 package io.javabrains.tinder_ai_backend;
 
-import io.javabrains.tinder_ai_backend.conversations.Conversation;
 import io.javabrains.tinder_ai_backend.conversations.ConversationRepository;
 import io.javabrains.tinder_ai_backend.matches.MatchRepository;
 import io.javabrains.tinder_ai_backend.profiles.ProfileCreationService;

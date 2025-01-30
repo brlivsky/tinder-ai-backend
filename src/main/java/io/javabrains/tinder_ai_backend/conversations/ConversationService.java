@@ -22,7 +22,7 @@ public class ConversationService {
     public Conversation generateProfileResponse(Conversation conversation, Profile profile, Profile user) {
         SystemMessage systemMessage = new SystemMessage("Pretend to be a Tinder user with name " + profile.firstName() + " " + profile.lastName()
         + " age " + profile.age() + "myersBriggsPersonalityType " + profile.myersBriggsPersonalityType() + "bio " + profile.bio()
-        + "ethnicity " + profile.ethnicity() + "gender " + profile.gender());
+        + "ethnicity " + profile.ethnicity() + "gender " + profile.gender() + "Keep the chat clear, concise and fun");
 
         // What does the below code do?
         List<AbstractMessage> conversationMessages = conversation.messages().stream().map(chatMessage -> {
