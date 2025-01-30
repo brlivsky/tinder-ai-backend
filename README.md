@@ -15,7 +15,6 @@ The frontend for this project is available at: [Tinder AI Frontend](https://gith
 
 - **Language:** Java (Spring Boot)
 - **AI Integration:** Spring AI with Ollama (Llama 3)
-- **AI Model:** Ollama (Llama3)
 - **Database:** MongoDB
 
 ## Installation and Setup
