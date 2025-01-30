@@ -1,0 +1,3 @@
+What does List.of() do?
+Why CrossOrigins?
+How does the connection happens?

@@ -1,4 +1,4 @@
-package io.javabrains.tinder_ai_backend.conversation;
+package io.javabrains.tinder_ai_backend.conversations;
 
 import java.util.List;
 
